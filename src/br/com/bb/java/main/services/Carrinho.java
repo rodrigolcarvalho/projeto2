@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import br.com.bb.java.main.models.Pedido;
+import br.com.bb.java.main.models.Mercadoria;
 
 public class Carrinho {
-    private final HashMap<Integer, Pedido> pedidos;
+    private final HashMap<Integer, Mercadoria> pedidos;
 
     public Carrinho() {
-        this.pedidos = new HashMap<Integer, Pedido>();
+        this.pedidos = new HashMap<Integer, Mercadoria>();
     }
 
-    public HashMap<Integer, Pedido> itens() {
+    public HashMap<Integer, Mercadoria> itens() {
         return pedidos;
     }
     
-    public void adicionarItem(Integer id, Pedido pedido) {
+    public void adicionarItem(Integer id, Mercadoria pedido) {
         pedidos.put(id, pedido);
     }
 }

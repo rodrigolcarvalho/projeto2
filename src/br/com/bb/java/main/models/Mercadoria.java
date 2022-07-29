@@ -1,11 +1,11 @@
 package br.com.bb.java.main.models;
 
-public class Pedido {
+public class Mercadoria {
     private Produto produto;
     private int quantidade;
     private Double precoTotal;
 
-    public Pedido(Produto produto, int quantidade) {
+    public Mercadoria(Produto produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.precoTotal = produto.getPreco() * this.quantidade;
