@@ -1,6 +1,7 @@
 package br.com.bb.java.main.models;
 
 public class Produto {
+    private int codigo;
     private String nome;
     private Double preco;
 
@@ -26,5 +27,10 @@ public class Produto {
         this.preco = preco;
     }
 
-    
+    public int getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 }
