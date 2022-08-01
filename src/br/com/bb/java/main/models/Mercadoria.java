@@ -33,5 +33,16 @@ public class Mercadoria {
     public Double getPrecoTotal() {
         return this.precoTotal;
     }
+
+
+    @Override
+    public String toString() {
+        return "" +
+            " produto:'" + getProduto() + "'" +
+            ", quantidade:'" + getQuantidade() + "'" +
+            ", precoTotal: 'R$" + getPrecoTotal() + "'" +
+            "\n";
+    }
+
     
 }

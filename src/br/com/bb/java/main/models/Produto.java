@@ -6,7 +6,8 @@ public class Produto {
     private Double preco;
 
 
-    public Produto(String nome, Double preco) {
+    public Produto(int codigo, String nome, Double preco) {
+        this.codigo = codigo;
         this.nome = nome;
         this.preco = preco;
     }
@@ -33,4 +34,14 @@ public class Produto {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " codigo='" + getCodigo() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", preco='" + getPreco() + "'" +
+            "}";
+    }
+
 }
