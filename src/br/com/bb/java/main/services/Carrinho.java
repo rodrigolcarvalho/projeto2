@@ -17,23 +17,24 @@ public class Carrinho {
     public HashMap<Integer, Mercadoria> getMercadorias() {
         return mercadorias;
     }
-    public Mercadoria getMercadoriaPorId(int id) throws BuscaMercadoriaExcecao{
+
+    public Mercadoria getMercadoriaPorId(int id) throws BuscaMercadoriaExcecao {
         try {
             return mercadorias.get(id);
         } catch (Exception e) {
             throw e;
         }
     }
-    
+
     public void adicionarItem(Produto produto, int quantidade) {
         if (this.mercadorias.containsKey(produto.getCodigo())) {
             quantidade += this.mercadorias.get(produto.getCodigo()).getQuantidade();
         }
-        
+
         mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));
     }
 
-    public void retirarItem(Produto produto, int quantidade) throws BuscaMercadoriaExcecao {
+    public void retirarItem(Produto produto, int quantidade) {
         if (this.mercadorias.containsKey(produto.getCodigo())) {
             quantidade -= this.mercadorias.get(produto.getCodigo()).getQuantidade();
         } else {
@@ -41,13 +42,14 @@ public class Carrinho {
             return;
         }
 
-        if (quantidade < 0) {
+        if (quantidade <= 0) {
             this.mercadorias.remove(produto.getCodigo());
         } else {
-            mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));            
+            mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));
         }
     }
-    public Double getPrecoTotal () {
+
+    public Double getPrecoTotal() {
         Double precoTotal = 0.0;
         for (Map.Entry<Integer, Mercadoria> it : mercadorias.entrySet()) {
             precoTotal += it.getValue().getPrecoTotal();
@@ -57,9 +59,7 @@ public class Carrinho {
 
     @Override
     public String toString() {
-        return 
-            "carrinho='\n" + getMercadorias().toString() + "'";
+        return "carrinho='\n" + getMercadorias().toString() + "'";
     }
-        
-        
+
 }
