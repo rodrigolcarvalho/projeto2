@@ -26,33 +26,25 @@ public class Carrinho {
     }
     
     public void adicionarItem(Produto produto, int quantidade) {
-        int qtdAnterior = 0;
-        try {
-            qtdAnterior = mercadorias.get(produto.getCodigo()).getQuantidade();
-        } catch (Exception e) {
-
+        if (this.mercadorias.containsKey(produto.getCodigo())) {
+            quantidade += this.mercadorias.get(produto.getCodigo()).getQuantidade();
         }
-        if(qtdAnterior > 0) {
-            mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade + qtdAnterior));
-        }
-        else {
-            mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));
-        }
+        
+        mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));
     }
 
     public void retirarItem(Produto produto, int quantidade) throws BuscaMercadoriaExcecao {
-        int qtdAnterior = 0;
-        try {
-            qtdAnterior = mercadorias.get(produto.getCodigo()).getQuantidade();
-        } catch (Exception e) {
+        if (this.mercadorias.containsKey(produto.getCodigo())) {
+            quantidade -= this.mercadorias.get(produto.getCodigo()).getQuantidade();
+        } else {
             System.out.println("Produto não encontrado");
-            throw e;
+            return;
         }
-        if(qtdAnterior - quantidade > 0) {
-            mercadorias.put(produto.getCodigo(), new Mercadoria(produto, qtdAnterior - quantidade));
-        }
-        else {
-            mercadorias.remove(produto.getCodigo());
+
+        if (quantidade < 0) {
+            this.mercadorias.remove(produto.getCodigo());
+        } else {
+            mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));            
         }
     }
     public Double getPrecoTotal () {
