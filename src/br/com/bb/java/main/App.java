@@ -14,9 +14,20 @@ public class App {
         carrinho.adicionarItem(camiseta, 2);
         carrinho.adicionarItem(bermuda, 1);
         carrinho.adicionarItem(blusa, 3);
-
-        carrinho.adicionarItem(blusa, 2);
-
         System.out.println(carrinho);
+
+        System.out.println("Adicionar mais 2 blusas");
+        carrinho.adicionarItem(blusa, 2);
+        System.out.println(carrinho);
+        
+        System.out.println("Retirar 1 bermuda");
+        carrinho.retirarItem(bermuda, 1);
+        System.out.println(carrinho);
+        
+        System.out.println("Retirar 4 blusas");
+        carrinho.retirarItem(blusa, 4);
+        System.out.println(carrinho);
+        System.out.println("Preço tota: R$" + carrinho.getPrecoTotal());
+
     }
 }
