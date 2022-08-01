@@ -1,5 +1,6 @@
 package br.com.bb.java.main;
 
+import br.com.bb.java.main.dao.ProdutoDao;
 import br.com.bb.java.main.models.Produto;
 import br.com.bb.java.main.services.Carrinho;
 
@@ -9,11 +10,19 @@ public class App {
         Produto bermuda = new Produto(2, "bermuda", 50.0);
         Produto blusa = new Produto(3, "blusa", 150.0);
 
+        ProdutoDao produtos = new ProdutoDao();
+        produtos.salvar(camiseta);
+        produtos.salvar(bermuda);
+        produtos.salvar(blusa);
+        System.out.println("Lista de produtos disponíveis: " + produtos.buscarTodos());
+        
+
+        
         Carrinho carrinho = new Carrinho();
 
-        carrinho.adicionarItem(camiseta, 2);
-        carrinho.adicionarItem(bermuda, 1);
-        carrinho.adicionarItem(blusa, 3);
+        carrinho.adicionarItem(camiseta, 20);
+        carrinho.adicionarItem(bermuda, 10);
+        carrinho.adicionarItem(blusa, 30);
         System.out.println(carrinho);
 
         System.out.println("Adicionar mais 2 blusas");
@@ -27,7 +36,7 @@ public class App {
         System.out.println("Retirar 4 blusas");
         carrinho.retirarItem(blusa, 4);
         System.out.println(carrinho);
-        System.out.println("Preço tota: R$" + carrinho.getPrecoTotal());
+        System.out.println("Total a pagar: R$" + carrinho.getPrecoTotal());
 
     }
 }
