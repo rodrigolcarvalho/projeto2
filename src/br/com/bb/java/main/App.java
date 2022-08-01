@@ -1,6 +1,8 @@
 package br.com.bb.java.main;
 
 import br.com.bb.java.main.dao.ProdutoDao;
+import br.com.bb.java.main.models.Cliente;
+import br.com.bb.java.main.models.PessoaFisica;
 import br.com.bb.java.main.models.Produto;
 import br.com.bb.java.main.services.Carrinho;
 
@@ -15,8 +17,6 @@ public class App {
         produtos.salvar(bermuda);
         produtos.salvar(blusa);
         System.out.println("Lista de produtos disponíveis: " + produtos.buscarTodos());
-        
-
         
         Carrinho carrinho = new Carrinho();
 
@@ -37,6 +37,10 @@ public class App {
         carrinho.retirarItem(blusa, 4);
         System.out.println(carrinho);
         System.out.println("Total a pagar: R$" + carrinho.getPrecoTotal());
+
+        Cliente cliente = new PessoaFisica("017", "nome");
+        cliente.addCarrinho(carrinho);
+
 
     }
 }
