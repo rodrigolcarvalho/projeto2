@@ -5,19 +5,16 @@ import java.util.List;
 
 import br.com.bb.java.main.services.Carrinho;
 
-public class Cliente {
-    private final String id;
+public abstract class Cliente {
     private String nome;
     private final List<Carrinho> carrinhos;
 
 
-    public Cliente(String id, String nome) {
-        this.id = id;
+    public Cliente(String nome) {
         this.nome = nome;
         this.carrinhos = new ArrayList<>();
     }
-    public Cliente(String id, String nome, Carrinho carrinho) {
-        this.id = id;
+    public Cliente(String nome, Carrinho carrinho) {
         this.nome = nome;
         this.carrinhos = new ArrayList<>();
         this.carrinhos.add(carrinho);
@@ -30,12 +27,6 @@ public class Cliente {
         this.carrinhos.add(carrinho);
     }
     
-
-    public String getId() {
-        return this.id;
-    }
-
-
     public String getNome() {
         return this.nome;
     }
@@ -43,6 +34,8 @@ public class Cliente {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public abstract String getId();
     
 
     @Override

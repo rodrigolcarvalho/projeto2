@@ -1,7 +1,6 @@
 package br.com.bb.java.main.services;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import br.com.bb.java.main.exceptions.BuscaMercadoriaExcecao;
 import br.com.bb.java.main.models.Mercadoria;
@@ -51,8 +50,8 @@ public class Carrinho {
 
     public Double getPrecoTotal() {
         Double precoTotal = 0.0;
-        for (Map.Entry<Integer, Mercadoria> it : mercadorias.entrySet()) {
-            precoTotal += it.getValue().getPrecoTotal();
+        for (Mercadoria mercadoria : mercadorias.values()) {
+            precoTotal += mercadoria.getPrecoTotal();
         }
         return precoTotal;
     }

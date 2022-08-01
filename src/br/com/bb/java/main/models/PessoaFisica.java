@@ -4,11 +4,12 @@ public class PessoaFisica extends Cliente{
     private final String cpf;
 
     public PessoaFisica(String id, String nome) {
-        super(id, nome);
+        super(nome);
         this.cpf = id;
     }
 
-    public String getCpf() {
+    @Override
+    public String getId() {
         return cpf;
     }
     
