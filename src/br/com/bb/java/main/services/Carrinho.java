@@ -8,6 +8,7 @@ import br.com.bb.java.main.models.Produto;
 
 public class Carrinho {
     private final Double TAXA_FRETE = 0.05;
+    private final Double TAXA_IMPORACAO = 0.60;
     private final Double PRECO_FRETE_GRATIS = 149.99;
     private final HashMap<Integer, Mercadoria> mercadorias;
 
@@ -49,7 +50,7 @@ public class Carrinho {
             mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));
         }
     }
-   
+
     public Double getPrecoTotal() {
         Double precoTotal = 0.0;
         for (Mercadoria mercadoria : mercadorias.values()) {
@@ -58,29 +59,40 @@ public class Carrinho {
         return precoTotal;
     }
     /*
-    public Double getFrete(){
-        Double frete = 0.0;
-        if(getPrecoTotal() >= PRECO_FRETE_GRATIS ){
-            frete = getPrecoTotal() * TAXA_FRETE;
-        }
-       
-        return frete;
-    }
-     */ 
+     * public Double getFrete(){
+     * Double frete = 0.0;
+     * if(getPrecoTotal() >= PRECO_FRETE_GRATIS ){
+     * frete = getPrecoTotal() * TAXA_FRETE;
+     * }
+     * 
+     * return frete;
+     * }
+     */
 
-    public Double getFrete(){
+    public Double getFrete() {
         Double frete = 0.0;
         for (Mercadoria mercadoria : mercadorias.values()) {
-            // cobrança de frete ( porcentagem) para produtos com valor menor que 149.99, acima n eh cobrado frete
-            if(mercadoria.getProduto().getPreco() <= PRECO_FRETE_GRATIS){
-                frete = frete +(mercadoria.getProduto().getPreco() * TAXA_FRETE);
-                
+            // cobrança de frete ( porcentagem) para produtos com valor menor que 149.99,
+            // acima n eh cobrado frete
+            if (mercadoria.getProduto().getPreco() <= PRECO_FRETE_GRATIS) {
+                frete = frete + (mercadoria.getProduto().getPreco() * TAXA_FRETE);
             }
         }
-       
         return frete;
     }
-    
+
+    public Double getTaxaExtra() {
+        Double taxaExtra = 0d;
+        for (Mercadoria mercadoria : mercadorias.values()) {
+            Produto produto = mercadoria.getProduto();
+            // Cobrança de taxa extra (porcentagem) para produtos importados, produtos não
+            // importados sem taxa
+            if (produto.isImportado()) {
+                taxaExtra += (produto.getPreco() * TAXA_IMPORACAO);
+            }
+        }
+        return taxaExtra;
+    }
 
     @Override
     public String toString() {

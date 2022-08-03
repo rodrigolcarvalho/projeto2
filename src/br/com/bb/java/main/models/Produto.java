@@ -4,12 +4,24 @@ public class Produto {
     private int codigo;
     private String nome;
     private Double preco;
-
+    private boolean importado;
 
     public Produto(int codigo, String nome, Double preco) {
         this.codigo = codigo;
         this.nome = nome;
         this.preco = preco;
+        this.importado = false;
+    }
+
+    public Produto(int codigo, String nome, Double preco, boolean importado) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.preco = preco;
+        this.importado = importado;
+    }
+
+    public boolean isImportado() {
+        return this.importado;
     }
 
     public String getNome() {
@@ -31,6 +43,7 @@ public class Produto {
     public int getCodigo() {
         return codigo;
     }
+
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -38,10 +51,10 @@ public class Produto {
     @Override
     public String toString() {
         return "{" +
-            " codigo='" + getCodigo() + "'" +
-            ", nome='" + getNome() + "'" +
-            ", preco='" + getPreco() + "'" +
-            "}";
+                " codigo='" + getCodigo() + "'" +
+                ", nome='" + getNome() + "'" +
+                ", preco='" + getPreco() + "'" +
+                "}";
     }
 
 }

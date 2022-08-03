@@ -10,7 +10,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         Produto camiseta = new Produto(1, "camiseta", 120.0);
         Produto bermuda = new Produto(2, "bermuda", 50.0);
-        Produto blusa = new Produto(3, "blusa", 150.0);
+        Produto blusa = new Produto(3, "blusa", 150.0, true);
 
         ProdutoDao produtos = new ProdutoDao();
         produtos.salvar(camiseta);
@@ -37,6 +37,7 @@ public class App {
         //carrinho.retirarItem(blusa, 4);
         //System.out.println(carrinho);
         System.out.println("Total a pagar: R$" + carrinho.getPrecoTotal());
+        System.out.println("Total Taxa extra Importação: R$" + carrinho.getTaxaExtra());
         System.out.println("Total Valor do Frete: R$" + carrinho.getFrete());
 
         Cliente cliente = new PessoaFisica("017", "nome");
