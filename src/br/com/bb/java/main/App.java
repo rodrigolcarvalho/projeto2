@@ -29,14 +29,15 @@ public class App {
         carrinho.adicionarItem(blusa, 2);
         System.out.println(carrinho);
         
-        System.out.println("Retirar 1 bermuda");
-        carrinho.retirarItem(bermuda, 1);
-        System.out.println(carrinho);
+        //System.out.println("Retirar 1 bermuda");
+        //carrinho.retirarItem(bermuda, 1);
+        //System.out.println(carrinho);
         
-        System.out.println("Retirar 4 blusas");
-        carrinho.retirarItem(blusa, 4);
-        System.out.println(carrinho);
+       // System.out.println("Retirar 4 blusas");
+        //carrinho.retirarItem(blusa, 4);
+        //System.out.println(carrinho);
         System.out.println("Total a pagar: R$" + carrinho.getPrecoTotal());
+        System.out.println("Total Valor do Frete: R$" + carrinho.getFrete());
 
         Cliente cliente = new PessoaFisica("017", "nome");
         cliente.addCarrinho(carrinho);
