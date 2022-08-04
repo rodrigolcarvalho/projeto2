@@ -1,6 +1,13 @@
 package br.com.bb.projeto2.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "produtos")
 public class Produto {
+    @Id
     private int codigo;
     private String nome;
     private Double preco;
