@@ -1,10 +1,7 @@
 package br.com.bb.projeto2.dao;
 import java.util.List;
-import java.util.Map;
 
-import br.com.bb.projeto2.models.Mercadoria;
 import br.com.bb.projeto2.models.Produto;
-import br.com.bb.projeto2.services.Carrinho;
 
 import javax.persistence.EntityManager;
 
@@ -15,9 +12,13 @@ public class ProdutoDao {
         this.em = em;
     }
 
-    public void salvar(Produto produto) {
+    public void adicionar(Produto produto) {
+        this.em.getTransaction().begin();
+
         this.em.persist(produto);
         System.out.println("Produto salvo " + produto);
+
+        this.em.getTransaction().commit();
     }
 
     public List<Produto> buscarTodos() {
@@ -26,19 +27,25 @@ public class ProdutoDao {
     }
 
     public void remover(Produto produto) {
+        this.em.getTransaction().begin();
+
         produto = this.em.merge(produto); // garante que o objeto está managed
         this.em.remove(produto);
         System.out.println("Produto removido " + produto);
+
+        this.em.getTransaction().commit();
     }
 
-    public Produto buscaPorId(Integer o) {
-        return this.em.find(Produto.class, o);
+    public Produto buscaPorId(Integer id) {
+        return this.em.find(Produto.class, id);
     }
 
-    public void salvarProdutosDeUmCarrinho (Carrinho carrinho) {
-        for (Map.Entry<Integer, Mercadoria> it : carrinho.getMercadorias().entrySet()) {
-           salvar(it.getValue().getProduto());
-        }
+    public Produto buscaPorNome(String nome) {
+        String jpql = "SELECT p FROM Produto p WHERE nome = :nome";
+        return this.em.createQuery(jpql, Produto.class)
+                .setParameter("nome", nome)
+                .getSingleResult();
     }
+
 
 }

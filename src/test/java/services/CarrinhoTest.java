@@ -19,6 +19,9 @@ public class CarrinhoTest {
 
     @Test
     public void retirarItem() {
+//        System.out.println("Retirar 40 blusas");
+//        carrinho.retirarItem(produtoDao.buscaPorNome("blusa"), 40);
+//        System.out.println(carrinho);
     }
 
     @Test

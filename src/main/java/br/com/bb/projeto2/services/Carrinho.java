@@ -4,17 +4,26 @@ import br.com.bb.projeto2.exceptions.BuscaMercadoriaExcecao;
 import br.com.bb.projeto2.models.Mercadoria;
 import br.com.bb.projeto2.models.Produto;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.HashMap;
-
 
 public class Carrinho {
     private final Double TAXA_FRETE = 0.05;
     private final Double TAXA_IMPORACAO = 0.60;
     private final Double PRECO_FRETE_GRATIS = 149.99;
     private final HashMap<Integer, Mercadoria> mercadorias;
+    private static Carrinho instancia;
 
-    public Carrinho() {
+    private Carrinho() {
         this.mercadorias = new HashMap<Integer, Mercadoria>();
+    }
+
+    public static Carrinho getInstance() {
+        if (instancia == null) {
+            instancia = new Carrinho();
+        }
+        return instancia;
     }
 
     public HashMap<Integer, Mercadoria> getMercadorias() {
@@ -55,7 +64,7 @@ public class Carrinho {
         for (Mercadoria mercadoria : mercadorias.values()) {
             precoTotal += mercadoria.getPrecoTotal();
         }
-        return precoTotal;
+        return precoTotal + this.getFrete() + this.getTaxaExtra();
     }
     /*
      * public Double getFrete(){
