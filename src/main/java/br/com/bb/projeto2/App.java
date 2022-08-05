@@ -1,10 +1,12 @@
 package br.com.bb.projeto2;
 
 import br.com.bb.projeto2.dao.ProdutoDao;
+import br.com.bb.projeto2.models.Mercadoria;
 import br.com.bb.projeto2.models.TipoCategoria;
 import br.com.bb.projeto2.models.clientes.Cliente;
 import br.com.bb.projeto2.models.clientes.PessoaFisica;
 import br.com.bb.projeto2.models.Produto;
+import br.com.bb.projeto2.models.descontos.Desconto;
 import br.com.bb.projeto2.models.descontos.DescontoiFood;
 import br.com.bb.projeto2.services.Carrinho;
 import br.com.bb.projeto2.util.JPAUtil;
@@ -38,6 +40,21 @@ public class App {
             carrinho.retirarItem(produtoDao.buscaPorNome("blusa"), 31);
 
             carrinho.aplicarDesconto(new DescontoiFood(porcentagemDesconto));
+
+            Desconto fazNaRoupa = lista ->
+            {
+                double desconto = 0.0;
+                for (Mercadoria mercadoria: lista) {
+                    Produto produto = mercadoria.getProduto();
+                    if (produto.getCategoria().equals(TipoCategoria.ROUPA)) {
+                        desconto += mercadoria.getProduto().getPreco() * porcentagemDesconto;
+                    }
+                }
+                return desconto;
+            };
+
+            carrinho.aplicarDesconto(fazNaRoupa);
+
             carrinho.adicionarItem(produtoDao.buscaPorNome("sushi"), 30);
             System.out.println(carrinho);
 
