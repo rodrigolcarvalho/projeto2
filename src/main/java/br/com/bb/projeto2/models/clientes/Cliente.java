@@ -1,4 +1,4 @@
-package br.com.bb.projeto2.models;
+package br.com.bb.projeto2.models.clientes;
 
 
 import br.com.bb.projeto2.services.Carrinho;
