@@ -1,6 +1,6 @@
 package br.com.bb.projeto2.models.clientes;
 
-import br.com.bb.projeto2.models.Cliente;
+import br.com.bb.projeto2.models.clientes.Cliente;
 
 public class PessoaJuridica extends Cliente {
     private final String cnpj;
