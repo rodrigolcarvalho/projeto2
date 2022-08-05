@@ -11,7 +11,6 @@ public class Mercadoria {
         this.precoTotal = produto.getPreco() * this.quantidade;
     }
 
-
     public Produto getProduto() {
         return this.produto;
     }
@@ -34,7 +33,6 @@ public class Mercadoria {
         return this.precoTotal;
     }
 
-
     @Override
     public String toString() {
         return "" +
@@ -43,6 +41,4 @@ public class Mercadoria {
             ", precoTotal: 'R$" + getPrecoTotal() + "'" +
             "\n";
     }
-
-    
 }

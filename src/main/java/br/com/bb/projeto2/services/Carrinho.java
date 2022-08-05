@@ -22,11 +22,7 @@ public class Carrinho {
     }
 
     public Mercadoria getMercadoriaPorId(int id) throws BuscaMercadoriaExcecao {
-        try {
-            return mercadorias.get(id);
-        } catch (Exception e) {
-            throw e;
-        }
+        return mercadorias.get(id);
     }
 
     public void adicionarItem(Produto produto, int quantidade) {
@@ -38,18 +34,20 @@ public class Carrinho {
     }
 
     public void retirarItem(Produto produto, int quantidade) {
-        if (this.mercadorias.containsKey(produto.getCodigo())) {
-            quantidade -= this.mercadorias.get(produto.getCodigo()).getQuantidade();
-        } else {
+        if (!this.mercadorias.containsKey(produto.getCodigo())) {
             System.out.println("Produto não encontrado");
             return;
         }
 
+        Mercadoria mercadoria = this.mercadorias.get(produto.getCodigo());
+        quantidade = mercadoria.getQuantidade() - quantidade;
+        
         if (quantidade <= 0) {
             this.mercadorias.remove(produto.getCodigo());
-        } else {
-            mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));
-        }
+            return;
+        } 
+
+        mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));
     }
 
     public Double getPrecoTotal() {
@@ -76,7 +74,7 @@ public class Carrinho {
             // cobrança de frete ( porcentagem) para produtos com valor menor que 149.99,
             // acima n eh cobrado frete
             if (mercadoria.getProduto().getPreco() <= PRECO_FRETE_GRATIS) {
-                frete = frete + (mercadoria.getProduto().getPreco() * TAXA_FRETE);
+                frete += mercadoria.getProduto().getPreco() * TAXA_FRETE;
             }
         }
         return frete;
@@ -99,5 +97,4 @@ public class Carrinho {
     public String toString() {
         return "carrinho='\n" + getMercadorias().toString() + "'";
     }
-
 }

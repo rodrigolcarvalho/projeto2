@@ -39,7 +39,6 @@ public abstract class Cliente {
     }
 
     public abstract String getId();
-    
 
     @Override
     public String toString() {
@@ -49,6 +48,4 @@ public abstract class Cliente {
             ", carrinhos='" + getCarrinhos() + "'" +
             "}";
     }
-
-
 }
