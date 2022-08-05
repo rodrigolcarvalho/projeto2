@@ -18,6 +18,7 @@ public class Produto {
     private final String nome;
     private final Double preco;
     private boolean importado;
+    @Enumerated(EnumType.STRING)
     private TipoCategoria categoria;
 
 //    public Produto(String nome, Double preco) {

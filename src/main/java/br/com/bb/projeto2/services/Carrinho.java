@@ -12,18 +12,10 @@ public class Carrinho {
     private final Double TAXA_IMPORACAO = 0.60;
     private final Double PRECO_FRETE_GRATIS = 149.99;
     private final HashMap<Integer, Mercadoria> mercadorias;
-    private static Carrinho instancia;
     private Desconto desconto;
 
-    private Carrinho() {
+    public Carrinho() {
         this.mercadorias = new HashMap<Integer, Mercadoria>();
-    }
-
-    public static Carrinho getInstance() {
-        if (instancia == null) {
-            instancia = new Carrinho();
-        }
-        return instancia;
     }
 
     public HashMap<Integer, Mercadoria> getMercadorias() {

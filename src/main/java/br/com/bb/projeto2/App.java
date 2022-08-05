@@ -9,8 +9,8 @@ import br.com.bb.projeto2.models.descontos.DescontoiFood;
 import br.com.bb.projeto2.services.Carrinho;
 import br.com.bb.projeto2.util.JPAUtil;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-
 
 public class App {
 
@@ -18,9 +18,8 @@ public class App {
 
     private static final EntityManager em = JPAUtil.getEntityManager();
 
-    private final static Carrinho carrinho =  Carrinho.getInstance();
-
     public static void main(String[] args) throws Exception {
+        Carrinho carrinho = new Carrinho();
         ProdutoDao produtoDao = new ProdutoDao(JPAUtil.getEntityManager());
         load(produtoDao);
 
@@ -58,7 +57,7 @@ public class App {
 
     }
 
-    private static void load(ProdutoDao produtoDao) {
+    public static void load(ProdutoDao produtoDao) {
         Produto sushi = Produto.builder()
                 .categoria(TipoCategoria.ALIMENTICIO)
                 .nome("sushi")
