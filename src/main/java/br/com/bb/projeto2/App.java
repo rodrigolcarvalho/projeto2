@@ -2,7 +2,7 @@ package br.com.bb.projeto2;
 
 import br.com.bb.projeto2.dao.ProdutoDao;
 import br.com.bb.projeto2.models.Cliente;
-import br.com.bb.projeto2.models.PessoaFisica;
+import br.com.bb.projeto2.models.clientes.PessoaFisica;
 import br.com.bb.projeto2.models.Produto;
 import br.com.bb.projeto2.services.Carrinho;
 import br.com.bb.projeto2.util.JPAUtil;

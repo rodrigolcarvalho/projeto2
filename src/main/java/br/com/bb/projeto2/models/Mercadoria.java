@@ -1,5 +1,7 @@
 package br.com.bb.projeto2.models;
 
+import lombok.AllArgsConstructor;
+
 public class Mercadoria {
     private Produto produto;
     private int quantidade;
