@@ -1,11 +1,10 @@
 package br.com.bb.projeto2.services;
 
 import br.com.bb.projeto2.exceptions.BuscaMercadoriaExcecao;
+import br.com.bb.projeto2.models.descontos.Desconto;
 import br.com.bb.projeto2.models.Mercadoria;
 import br.com.bb.projeto2.models.Produto;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.HashMap;
 
 public class Carrinho {
@@ -14,6 +13,7 @@ public class Carrinho {
     private final Double PRECO_FRETE_GRATIS = 149.99;
     private final HashMap<Integer, Mercadoria> mercadorias;
     private static Carrinho instancia;
+    private Desconto desconto;
 
     private Carrinho() {
         this.mercadorias = new HashMap<Integer, Mercadoria>();
@@ -52,11 +52,15 @@ public class Carrinho {
         quantidade = mercadoria.getQuantidade() - quantidade;
         
         if (quantidade <= 0) {
-            this.mercadorias.remove(produto.getCodigo());
+            excluirItem(produto);
             return;
         } 
 
         mercadorias.put(produto.getCodigo(), new Mercadoria(produto, quantidade));
+    }
+
+    public void excluirItem(Produto produto) {
+        this.mercadorias.remove(produto.getCodigo());
     }
 
     public Double getPrecoTotal() {
@@ -64,23 +68,13 @@ public class Carrinho {
         for (Mercadoria mercadoria : mercadorias.values()) {
             precoTotal += mercadoria.getPrecoTotal();
         }
-        return precoTotal + this.getFrete() + this.getTaxaExtra();
+        return precoTotal + this.getFrete() + this.getTaxaExtra() - this.getDesconto();
     }
-    /*
-     * public Double getFrete(){
-     * Double frete = 0.0;
-     * if(getPrecoTotal() >= PRECO_FRETE_GRATIS ){
-     * frete = getPrecoTotal() * TAXA_FRETE;
-     * }
-     * 
-     * return frete;
-     * }
-     */
 
     public Double getFrete() {
         Double frete = 0.0;
         for (Mercadoria mercadoria : mercadorias.values()) {
-            // cobrança de frete ( porcentagem) para produtos com valor menor que 149.99,
+            // cobrança de frete (porcentagem) para produtos com valor menor que PRECO_FRETE_GRATIS,
             // acima n eh cobrado frete
             if (mercadoria.getProduto().getPreco() <= PRECO_FRETE_GRATIS) {
                 frete += mercadoria.getProduto().getPreco() * TAXA_FRETE;
@@ -100,6 +94,16 @@ public class Carrinho {
             }
         }
         return taxaExtra;
+    }
+
+    public void aplicarDesconto(Desconto desconto) {
+        this.desconto = desconto;
+    }
+
+    public Double getDesconto() {
+        if (this.desconto == null)
+            return 0.0;
+        return this.desconto.calcularDesconto(this.mercadorias.values());
     }
 
     @Override
